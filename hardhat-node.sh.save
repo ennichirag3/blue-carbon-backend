@@ -1,0 +1,7 @@
+nano hardhat-node.sh
+
+#!/bin/bash
+npx hardhat node
+
+wq
+

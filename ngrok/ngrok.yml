@@ -1,0 +1,7 @@
+version: "2"
+authtoken: 32ylwd1cqmsRmr9eIHxG91f9Vcu_88itaXUCasG75EousDDA4
+tunnels:
+  blue-carbon:
+    proto: http
+    addr: 5001
+

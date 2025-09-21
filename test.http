@@ -1,0 +1,95 @@
+### 0) Test if backend is running
+GET http://localhost:5001/
+
+######################
+# PROJECT APIs
+######################
+
+### 1) CREATE a new project
+POST http://localhost:5001/api/projects
+Content-Type: application/json
+
+{
+  "name": "Mangrove Plantation 6",
+  "description": "Planting mangroves to save coastal carbon.",
+  "location": "Goa",
+  "carbonSaved": 500
+}
+
+### 2) GET all projects
+GET http://localhost:5001/api/projects
+
+### 3) UPDATE a project (replace <PROJECT_ID> with actual ID)
+PUT http://localhost:5001/api/projects/68cd8e04132eb1b0954d7681
+Content-Type: application/json
+
+{
+  "name": "Updated Project",
+  "location": "Updated Location",
+  "carbonSaved": 1000
+}
+
+### 4) DELETE a project (replace <PROJECT_ID> with actual ID)
+DELETE http://localhost:5001/api/projects/68cd8e04132eb1b0954d7681
+
+### 5) BONUS – TOTAL PROJECT COUNT
+GET http://localhost:5001/api/projects/bonus/count/all
+
+### 6) BONUS – TOTAL CARBON SAVED
+GET http://localhost:5001/api/projects/bonus/carbon/total
+
+######################
+# USER APIs
+######################
+
+### 7) REGISTER a new user
+POST http://localhost:5001/api/users/register
+Content-Type: application/json
+
+{
+  "name": "Chirag",
+  "email": "chirag@example.com",
+  "password": "password123",
+  "walletAddress": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"
+}
+
+### 8) LOGIN user
+POST http://localhost:5001/api/users/login
+Content-Type: application/json
+
+{
+  "email": "chirag@example.com",
+  "password": "password123"
+}
+
+
+######################
+# BLOCKCHAIN APIs
+######################
+
+### 9) GET blockchain balance of an address
+GET http://localhost:5001/api/blockchain/balance/0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+
+### 10) TRANSFER ETH (carbon credits) between wallets
+POST http://localhost:5001/api/blockchain/transfer
+Content-Type: application/json
+
+{
+  "toAddress": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+  "amount": 10
+}
+
+### 11) GET all blockchain transactions (history)
+GET http://localhost:5001/api/blockchain/history
+
+### 12) GET transactions filtered by wallet address
+GET http://localhost:5001/api/blockchain/history/filter/0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+
+
+######################
+# QR APIs
+######################
+
+### 13) GET QR code 
+GET http://localhost:5001/api/projects/qrcode/68ce7d69ee650f675e560e17
+
