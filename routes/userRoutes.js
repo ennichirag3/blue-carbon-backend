@@ -38,7 +38,7 @@ router.post("/register", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("❌ Registration error:", err.message);
+    console.error("❌ Registration error:", err);
     res.status(500).json({ message: "Registration failed", error: err.message });
   }
 });
@@ -48,15 +48,22 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    if (!email || !password)
+      return res.status(400).json({ message: "Email and password are required" });
+
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: "Invalid email or password" });
 
     const isMatch = await user.matchPassword(password);
     if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
 
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || "supersecret", {
+      expiresIn: "7d",
+    });
+
     res.json({
       message: "✅ Login successful",
-      token: generateToken(user._id),
+      token,
       user: {
         id: user._id,
         name: user.name,
@@ -65,10 +72,11 @@ router.post("/login", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("❌ Login error:", err.message);
+    console.error("❌ Login error:", err);
     res.status(500).json({ message: "Login failed", error: err.message });
   }
 });
+
 
 // --- GET ALL USERS ---
 router.get("/", async (req, res) => {

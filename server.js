@@ -19,7 +19,7 @@ const startServer = async () => {
   app.use(express.urlencoded({ extended: true }));
 
   // --- MongoDB Connection ---
-  const mongoURI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/bluecarbon";
+  const mongoURI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/BlueBlock";
   try {
     await mongoose.connect(mongoURI);
     console.log("✅ MongoDB connected 🚀");
@@ -70,11 +70,6 @@ const startServer = async () => {
   const PORT = process.env.PORT || 5001;
   const server = app.listen(PORT, () => {
     console.log(`⚡ Server running on port ${PORT}`);
-
-    // --- PM2 Ready Signal ---
-    if (process.send) {
-      process.send("ready"); // PM2 will know backend is ready
-    }
   });
 
   // --- Graceful Shutdown ---
@@ -91,7 +86,6 @@ const startServer = async () => {
   process.on("SIGTERM", gracefulShutdown);
 };
 
-// --- Initialize ---
 startServer().catch((err) => {
   console.error("💥 Fatal error during startup:", err);
   process.exit(1);

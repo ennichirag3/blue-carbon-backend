@@ -47,10 +47,10 @@ POST http://localhost:5001/api/users/register
 Content-Type: application/json
 
 {
-  "name": "Chirag",
-  "email": "chirag@example.com",
+  "name": "mr x",
+  "email": "chirag1@example.com",
   "password": "password123",
-  "walletAddress": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"
+  "walletAddress": "0xde9be858da4a475276426320d5e9262ecfc3ba460bfac56360bfa6c4c"
 }
 
 ### 8) LOGIN user
@@ -58,9 +58,10 @@ POST http://localhost:5001/api/users/login
 Content-Type: application/json
 
 {
-  "email": "chirag@example.com",
+  "email": "chirag1@example.com",
   "password": "password123"
 }
+
 
 
 ######################
